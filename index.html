@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Ashikur Rahman - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #00ff88;
+            --secondary: #00b3ff;
+            --dark: #0a0a0a;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 5px var(--primary);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glow-box:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-title:hover:after {
+            transform: scaleX(1);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            left: 0;
+            top: 5px;
+            background: var(--primary);
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            left: 7px;
+            top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .certificate-card {
+            perspective: 1000px;
+        }
+        
+        .certificate-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .certificate-card:hover .certificate-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .certificate-front, .certificate-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        
+        .certificate-back {
+            transform: rotateY(180deg);
+        }
+        
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <div id="particles-js"></div>
+    
+    <header class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold glow-text">
+                    <span class="text-primary">A</span>shikur
+                </a>
+                
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="#home" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-primary transition">About</a></li>
+                        <li><a href="#experience" class="hover:text-primary transition">Experience</a></li>
+                        <li><a href="#education" class="hover:text-primary transition">Education</a></li>
+                        <li><a href="#skills" class="hover:text-primary transition">Skills</a></li>
+                        <li><a href="#projects" class="hover:text-primary transition">Projects</a></li>
+                        <li><a href="#certificates" class="hover:text-primary transition">Certificates</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="md:hidden text-xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-20">
+            <div class="container mx-auto px-6 py-20">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 animate-on-scroll">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                            Hi, I'm <span class="text-primary">Ashikur Rahman</span>
+                        </h1>
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">
+                            Software Quality Assurance Engineer
+                        </h2>
+                        <p class="text-lg mb-8 text-gray-400 max-w-lg">
+                            3+ years of experience in Software Testing and Quality Assurance with expertise in automation testing and quality management.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#contact" class="px-6 py-3 bg-primary text-black font-semibold rounded-full hover:bg-opacity-90 transition glow-box">
+                                Contact Me
+                            </a>
+                            <a href="#projects" class="px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:bg-opacity-10 transition">
+                                View Projects
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary glow-box">
+                            <img src="https://storage.googleapis.com/grow-with-goog-publish-prod-media/images/auther3-overview.2e16d.2e16d0ba.fill-450x450.format-jpeg.jpg" alt="Ashikur Rahman" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-primary opacity-0 hover:opacity-20 transition"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-black bg-opacity-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">01.</span> About Me
+                </h2>
+                
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/3 mb-10 md:mb-0 animate-on-scroll">
+                        <div class="relative w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-primary glow-box">
+                            <img src="https://via.placeholder.com/400" alt="Ashikur Rahman" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 md:pl-12 animate-on-scroll" style="transition-delay: 0.2s;">
+                        <p class="text-lg mb-6 text-gray-300">
+                            I'm a passionate Software Quality Assurance Engineer with 3+ years of experience in ensuring software quality through comprehensive testing methodologies. My expertise spans both manual and automation testing across web and mobile applications.
+                        </p>
+                        <p class="text-lg mb-6 text-gray-300">
+                            I specialize in creating robust test automation frameworks using Selenium, Cypress, and Appium, and have extensive experience with API testing using Postman and REST Assured. My goal is to bridge the gap between development and quality assurance to deliver flawless user experiences.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2"><i class="fas fa-chevron-right"></i></span>
+                                <span><strong>Name:</strong> Md. Ashikur Rahman</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2"><i class="fas fa-chevron-right"></i></span>
+                                <span><strong>Email:</strong> ashikurrahman1052@gmail.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2"><i class="fas fa-chevron-right"></i></span>
+                                <span><strong>Phone:</strong> +8801789833786</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2"><i class="fas fa-chevron-right"></i></span>
+                                <span><strong>GitHub:</strong> Ashik1074</span>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-block px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:bg-opacity-10 transition">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">02.</span> Work Experience
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="animate-on-scroll">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-briefcase text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Senior Software Quality Assurance Engineer</h3>
+                                    <p class="text-gray-400">Integrated Software & Technologies Ltd.</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> September 2024 - Present</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Led a team of 5 to test web and mobile applications
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Built automation with Selenium, Cypress, and Java, reducing manual work percentage
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Worked with devs and PMs to set quality standards and streamline CI/CD with Jenkins and GitLab for weekly launches
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Utilized Git and GitHub for effective collaboration and project management
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-briefcase text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Software Quality Assurance Engineer</h3>
+                                    <p class="text-gray-400">QA Harbor Limited</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> July 2023 - August 2024</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Developed a comprehensive set of test cases in Notion for efficient test management
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Tested complex applications to ensure quality and functionality
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Led QA Craft classes on API testing automation
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-briefcase text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Junior Software Quality Assurance Engineer</h3>
+                                    <p class="text-gray-400">AubTech</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> May 2022 - June 2022</p>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Gained foundational knowledge in software testing methodologies
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Assisted senior QA engineers in test case development and execution
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Participated in bug tracking and reporting processes
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education" class="py-20 bg-black bg-opacity-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">03.</span> Education
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="animate-on-scroll">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-graduation-cap text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">BSc in CSE</h3>
+                                    <p class="text-gray-400">Brac University</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> Jan 2018 - May 2022</p>
+                            <p class="text-gray-400">
+                                Bachelor of Science in Computer Science & Engineering with a focus on software development and quality assurance.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-graduation-cap text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">HSC</h3>
+                                    <p class="text-gray-400">Comilla Victoria College</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> 2015 - 2017</p>
+                            <p class="text-gray-400">
+                                Higher Secondary School Certificate in Science with a focus on Mathematics, Physics, and Chemistry.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-graduation-cap text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">SSC</h3>
+                                    <p class="text-gray-400">Comilla Zilla School</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 mb-4"><i class="fas fa-calendar-alt text-primary mr-2"></i> 2014 - 2015</p>
+                            <p class="text-gray-400">
+                                Secondary School Certificate in Science with excellent academic performance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">04.</span> Skills & Proficiencies
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="animate-on-scroll">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <h3 class="text-xl font-bold mb-6 text-primary">Technical Skills</h3>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Automation Testing (Selenium, Cypress)</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>API Testing (Postman, REST Assured)</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Performance Testing (JMeter)</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Database Management (MySQL)</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <h3 class="text-xl font-bold mb-6 text-primary">Programming & Tools</h3>
+                            
+                            <div class="flex flex-wrap gap-4 mb-8">
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Java
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Python
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    JavaScript
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Selenium
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Cypress
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Appium
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Postman
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    REST Assured
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    JMeter
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Jira
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Git
+                                </div>
+                                <div class="px-4 py-2 bg-primary bg-opacity-20 rounded-full text-primary">
+                                    Jenkins
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold mb-4 text-primary">Soft Skills</h3>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Team Leadership
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Problem Solving
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Communication
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Analytical Thinking
+                                </li>
+                                <li class="flex">
+                                    <span class="text-primary mr-2">•</span>
+                                    Attention to Detail
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-black bg-opacity-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">05.</span> Project Experience
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="animate-on-scroll">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Employee Management System</h3>
+                                    <p class="text-gray-400">Manual Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                Comprehensive manual testing of an employee management system including functional, UI, and regression testing.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Test Materials <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Online Job Portal</h3>
+                                    <p class="text-gray-400">Manual Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                End-to-end testing of a job portal application including user registration, job posting, and application processes.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Test Materials <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">TIB Information Management System</h3>
+                                    <p class="text-gray-400">Manual Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                Testing of a complex information management system for Transparency International Bangladesh.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Test Materials <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Career Web Application</h3>
+                                    <p class="text-gray-400">Automation Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                Automated testing of a career web application using Selenium with comprehensive test coverage.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Source Code <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Swaglabs App</h3>
+                                    <p class="text-gray-400">Automation Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                Automated testing of Swaglabs e-commerce application with Allure Test Report generation.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Source Code <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="bg-gray-900 bg-opacity-50 p-6 rounded-lg glow-box h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Ecommerce Website</h3>
+                                    <p class="text-gray-400">Automation Testing</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 mb-4">
+                                Comprehensive automation testing of an ecommerce website using Selenium and TestNG framework.
+                            </p>
+                            <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                View Source Code <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Certificates Section -->
+        <section id="certificates" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">06.</span> Certifications
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="animate-on-scroll certificate-card">
+                        <div class="certificate-inner bg-gray-900 bg-opacity-50 rounded-lg glow-box h-full">
+                            <div class="certificate-front p-6 h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-certificate text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold">JAVA Certification</h3>
+                                        <p class="text-gray-400">Programming</p>
+                                    </div>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-gray-400 mb-4">
+                                        Certified in Java programming with expertise in object-oriented concepts, collections framework, and exception handling.
+                                    </p>
+                                </div>
+                                <div class="mt-auto text-center">
+                                    <span class="text-primary">Click to view certificate</span>
+                                </div>
+                            </div>
+                            <div class="certificate-back p-6 h-full flex flex-col justify-center items-center">
+                                <img src="https://via.placeholder.com/300x200?text=JAVA+Certificate" alt="JAVA Certificate" class="w-full h-auto mb-4 rounded">
+                                <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                    View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll certificate-card" style="transition-delay: 0.2s;">
+                        <div class="certificate-inner bg-gray-900 bg-opacity-50 rounded-lg glow-box h-full">
+                            <div class="certificate-front p-6 h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-certificate text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold">SQL Certification</h3>
+                                        <p class="text-gray-400">Database</p>
+                                    </div>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-gray-400 mb-4">
+                                        Certified in SQL with expertise in database design, complex queries, stored procedures, and performance optimization.
+                                    </p>
+                                </div>
+                                <div class="mt-auto text-center">
+                                    <span class="text-primary">Click to view certificate</span>
+                                </div>
+                            </div>
+                            <div class="certificate-back p-6 h-full flex flex-col justify-center items-center">
+                                <img src="https://via.placeholder.com/300x200?text=SQL+Certificate" alt="SQL Certificate" class="w-full h-auto mb-4 rounded">
+                                <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                    View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-on-scroll certificate-card" style="transition-delay: 0.4s;">
+                        <div class="certificate-inner bg-gray-900 bg-opacity-50 rounded-lg glow-box h-full">
+                            <div class="certificate-front p-6 h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-trophy text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold">Programming Contest</h3>
+                                        <p class="text-gray-400">4th Position</p>
+                                    </div>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-gray-400 mb-4">
+                                        Achieved 4th position in Intra University Programming Contest 2018, demonstrating strong problem-solving skills.
+                                    </p>
+                                </div>
+                                <div class="mt-auto text-center">
+                                    <span class="text-primary">Click to view certificate</span>
+                                </div>
+                            </div>
+                            <div class="certificate-back p-6 h-full flex flex-col justify-center items-center">
+                                <img src="https://via.placeholder.com/300x200?text=Contest+Certificate" alt="Contest Certificate" class="w-full h-auto mb-4 rounded">
+                                <a href="#" class="text-primary hover:underline inline-flex items-center">
+                                    View Certificate <i class="fas fa-external-link-alt ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-black bg-opacity-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 section-title">
+                    <span class="text-primary">07.</span> Get In Touch
+                </h2>
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 animate-on-scroll">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <p class="text-gray-400 mb-8">
+                            Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <a href="mailto:ashikurrahman1052@gmail.com" class="text-gray-400 hover:text-primary transition">ashikurrahman1052@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Phone</h4>
+                                    <a href="tel:+8801789833786" class="text-gray-400 hover:text-primary transition">+8801789833786</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fab fa-github text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">GitHub</h4>
+                                    <a href="https://github.com/Ashik1074" target="_blank" class="text-gray-400 hover:text-primary transition">github.com/Ashik1074</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-globe text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Website</h4>
+                                    <a href="https://ashik1074.github.io/ashikurRahman/" target="_blank" class="text-gray-400 hover:text-primary transition">ashik1074.github.io/ashikurRahman/</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 animate-on-scroll" style="transition-delay: 0.2s;">
+                        <form class="bg-gray-900 bg-opacity-50 p-8 rounded-lg glow-box">
+                            <div class="mb-6">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Enter your name" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="subject" class="block mb-2 text-sm font-medium text-gray-300">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Enter subject" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Your Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Enter your message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-6 py-3 bg-primary text-black font-semibold rounded-full hover:bg-opacity-90 transition glow-box">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="py-8 bg-black bg-opacity-80">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">&copy; 2024 Md. Ashikur Rahman. All rights reserved.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary transition text-xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition text-xl">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Particles.js configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00ff88"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00ff88",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Custom cursor
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+            
+            document.querySelectorAll('a, button, input, textarea, .certificate-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorFollower.style.width = '30px';
+                    cursorFollower.style.height = '30px';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.width = '40px';
+                    cursorFollower.style.height = '40px';
+                });
+            });
+            
+            // Scroll animation
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const navMenu = document.querySelector('nav');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+                navMenu.classList.toggle('absolute');
+                navMenu.classList.toggle('top-16');
+                navMenu.classList.toggle('right-6');
+                navMenu.classList.toggle('bg-gray-900');
+                navMenu.classList.toggle('p-4');
+                navMenu.classList.toggle('rounded-lg');
+                navMenu.classList.toggle('shadow-lg');
+            });
+        });
+    </script>
+</body>
+</html>
